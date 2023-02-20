@@ -1,24 +1,15 @@
-﻿var name = "Ewa";
-var age = 17;
-var isFemale = false;
+﻿var number = 445665545454;
+var numberInString = number.ToString();
+char[] letters= numberInString.ToCharArray();
+int[] lettersCounter = new int[10];
 
+foreach(char c in letters)
+{
+    lettersCounter[c - '0'] = lettersCounter[c - '0'] + 1;
+}
 
-if (isFemale)
+for (int i = 0;i < 10; i++)
 {
-    if(age < 30)
-    {
-        Console.WriteLine("Kobieta poniżej 30 lat");
-    }
-    else if (name == "Ewa" && age == 33)
-    {
-        Console.WriteLine("Ewa, lat 33");
-    }
+    Console.WriteLine(i + " " + "=>" + " " + lettersCounter[i]);
 }
-else if (age < 18)
-{
-        Console.WriteLine("Niepełnoletni Mężczyzna");
-}
-else
-{
-    Console.WriteLine("Brak kryteriów");
-}
+
