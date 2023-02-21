@@ -22,17 +22,24 @@ namespace App21
 
         public void AddScores(int score)
         {
-            scores.Add(score);
-        }
-
-        public int GetScore()
-        {
-            return scores.Sum();
+            this.scores.Add(score);
         }
 
         public string GetPersonalData()
         {
-            return Imie + " " + Nazwisko + " " + Wiek;
+            return $"Dane pracownika: {Imie} {Nazwisko} {Wiek}";
+        }
+
+        public Statistics GetStatistics()
+        {
+            var statistics = new Statistics();
+            this.scores.Sort();
+
+            statistics.Max = this.scores.Last();
+            statistics.Min = this.scores.First();
+            statistics.Avg = (float)this.scores.Sum()/this.scores.Count();
+
+            return statistics;
         }
 
     }
