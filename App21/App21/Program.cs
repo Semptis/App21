@@ -1,15 +1,15 @@
-﻿var number = 445665545454;
-var numberInString = number.ToString();
-char[] letters= numberInString.ToCharArray();
-int[] lettersCounter = new int[10];
+﻿using App21;
 
-foreach(char c in letters)
-{
-    lettersCounter[c - '0'] = lettersCounter[c - '0'] + 1;
-}
+Employee emp = new Employee("Adam","Kowalski",22);
+Employee emp1 = new Employee("Mariusz", "Kowalski", 22);
+Employee emp2 = new Employee("Paweł", "Kowalski", 22);
 
-for (int i = 0;i < 10; i++)
-{
-    Console.WriteLine(i + " " + "=>" + " " + lettersCounter[i]);
-}
+List<Employee> result = new List<Employee>() {emp, emp1, emp2};
 
+emp.AddScores();
+emp1.AddScores();
+emp2.AddScores();
+
+List<Employee> sortedList = result.OrderBy(x => x.GetScore()).ToList();
+
+Console.WriteLine(sortedList.Last().GetPersonalData() + " " + sortedList.Last().GetScore());
