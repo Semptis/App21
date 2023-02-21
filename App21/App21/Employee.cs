@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App21
 {
-    internal class Employee
+    public class Employee
     {
         private List<int> scores = new List<int>();
         public Employee(string imie, string nazwisko, int wiek)
@@ -20,13 +20,9 @@ namespace App21
         private string Nazwisko { get; set; }
         private int Wiek { get; set; }
 
-        public void AddScores()
+        public void AddScores(int score)
         {
-            Random rnd = new Random();
-            for (int i = 0; i < 5; i++)
-            {
-                scores.Add(rnd.Next(1,11));
-            }          
+            scores.Add(score);
         }
 
         public int GetScore()
