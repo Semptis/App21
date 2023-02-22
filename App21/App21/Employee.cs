@@ -20,39 +20,30 @@ namespace App21
         private string Nazwisko { get; set; }
         private int Wiek { get; set; }
 
-        public void AddScores(float score)
+        public void AddScores(string letter)
         {
-            if (score >= 0 && score <= 100)
+            switch (letter)
             {
-                this.scores.Add(score);
+                case "a":
+                case "A":
+                    this.scores.Add(100);
+                    break;
+                case "b":
+                case "B":
+                    this.scores.Add(75);
+                    break;
+                case "c":
+                case "C":
+                    this.scores.Add(50);
+                    break;
+                case "d":
+                case "D":
+                    this.scores.Add(25);
+                    break;
+                default:
+                    this.scores.Add(0);
+                    break;
             }
-            else
-            {
-                Console.WriteLine("Grade must be between 0-100");
-            }
-        }
-        public void AddScores(string score)
-        {
-            if (float.TryParse(score,out var scores))
-            {
-                this.AddScores(scores);
-            }
-            else
-            {
-                Console.WriteLine("Invalid string parese");
-            }
-        }
-        public void AddScores(double score)
-        {
-            this.AddScores((float)score);
-        }
-        public void AddScores(long score)
-        {
-            this.AddScores((float)score);
-        }
-        public string GetPersonalData()
-        {
-            return $"Dane pracownika: {Imie} {Nazwisko} {Wiek}";
         }
 
         public Statistics GetStatistics()
@@ -64,6 +55,24 @@ namespace App21
             statistics.Min = this.scores.First();
             statistics.Avg = (float)this.scores.Sum() / this.scores.Count();
 
+            switch (statistics.Avg)
+            {
+                case var avg when avg >= 80:
+                    statistics.AvgLetter = "A";
+                    break;
+                case var avg when avg >= 65:
+                    statistics.AvgLetter = "B";
+                    break;
+                case var avg when avg >= 45:
+                    statistics.AvgLetter = "C";
+                    break;
+                case var avg when avg >= 30:
+                    statistics.AvgLetter = "D";
+                    break;
+                default:
+                    statistics.AvgLetter = "F";
+                    break;
+            }
             return statistics;
         }
 
