@@ -5,9 +5,9 @@ Employee emp = new Employee("Adam", "Kowalski", 22);
 List<Employee> employeeList = new List<Employee>() { emp };
 
 emp.AddScores(3);
-emp.AddScores(4);
-emp.AddScores(2);
-emp.AddScores(5);
+emp.AddScores(4.21212121);
+emp.AddScores(2.33);
+emp.AddScores("aaaa");
 
 var stat = emp.GetStatistics();
 
