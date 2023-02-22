@@ -20,7 +20,7 @@ namespace App21
         private string Nazwisko { get; set; }
         private int Wiek { get; set; }
 
-        public void AddScores(string letter)
+        public void AddGrade(string letter)
         {
             switch (letter)
             {
@@ -40,9 +40,12 @@ namespace App21
                 case "D":
                     this.scores.Add(25);
                     break;
-                default:
+                case "e":
+                case "E":
                     this.scores.Add(0);
                     break;
+                default:
+                    throw new Exception("Invalid grade");
             }
         }
 

@@ -1,4 +1,6 @@
 ﻿using App21;
+using System.Linq.Expressions;
+
 Employee emp = new Employee("Adam", "Kowalski", 22);
 
 while (true)
@@ -9,7 +11,14 @@ while (true)
     {
         break;
     }
-    emp.AddScores(grade);
+    try
+    {
+        emp.AddGrade(grade);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
 }
 
 var stat = emp.GetStatistics();

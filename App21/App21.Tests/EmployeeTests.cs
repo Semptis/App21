@@ -3,11 +3,11 @@ namespace App21.Tests
     public class EmployeeTests
     {
         [Test]
-        public void WhenUserGetPoints_ShouldCorrectStatistics()
+        public void WhenEmployeeGetGrade_ShouldCorrectStatistics()
         {
             var emp = new Employee("Adam", "Kowalski", 22);
-            emp.AddScores("A");
-            emp.AddScores("B");
+            emp.AddGrade("A");
+            emp.AddGrade("B");
 
             var stat = emp.GetStatistics();
 
