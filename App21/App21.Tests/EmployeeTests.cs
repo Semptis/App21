@@ -5,7 +5,7 @@ namespace App21.Tests
         [Test]
         public void WhenEmployeeGetGrade_ShouldCorrectStatistics()
         {
-            var emp = new Employee("Adam", "Kowalski", 22);
+            var emp = new Employee("Adam", "Kowalski",'M' ,22);
             emp.AddGrade("A");
             emp.AddGrade("B");
 

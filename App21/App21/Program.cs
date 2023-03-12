@@ -1,29 +1,27 @@
 ﻿using App21;
 using System.Linq.Expressions;
 
-Employee emp = new Employee("Adam", "Kowalski", 22);
 
-while (true)
+var apple = new Product("Apple", 3.99f);
+var grape = new ProductNearExpiryDate("Grape", 30);
+
+var magazine = new Magazine();
+magazine.AddProductsToStock(apple, 15);
+magazine.AddProductsToStock(grape, 20);
+
+
+
+try
 {
-    Console.WriteLine("Podaj ocene: ");
-    var grade = Console.ReadLine();
-    if (grade == "q")
-    {
-        break;
-    }
-    try
-    {
-        emp.AddGrade(grade);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-    }
+    magazine.ShowAcctualStock();
+    magazine.RemoveProductFromStock(apple, 5);
+    magazine.ShowAcctualStock();
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
 }
 
-var stat = emp.GetStatistics();
-
-Console.WriteLine($"Wynik: Max: {stat.Max} Min: {stat.Min} Avg: {stat.Avg} AvgL: {stat.AvgLetter}");
 
 
 
