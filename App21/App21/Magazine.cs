@@ -41,17 +41,19 @@ namespace App21
                     }
                     else
                     {
-                        throw new Exception($"Insufficient amount of {product.Name} in the warehouse.");
+                        throw new Exception($"Insufficient amount of {product.Name} in the magazine.");
                     }
                 }
             }
         }
-        public void ShowAcctualStockInMagazine()
+        public string ShowAcctualProduktsInMagazine()
         {
+            var products = "";
             foreach (var product in this.productsInMagazine)
             {
-                Console.WriteLine($"Product name: {product.product.Name} Count: {product.count}");
+                products += $"{product.product.Name} {product.count} ";
             }
+            return products;
         }
     }
 }

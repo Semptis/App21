@@ -32,10 +32,10 @@ namespace App21
             }
         }
 
-        public float SummaryPriceFromCart()
+        public float CartSummaryPrice()
         {
             var sum = 0f;
-            foreach (var item in products)
+            foreach (var item in this.products)
             {
                 sum += item.product.GetPrice() * item.count;
             }
