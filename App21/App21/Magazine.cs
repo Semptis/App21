@@ -11,16 +11,16 @@ namespace App21
 {
     public class Magazine
     {
-        private List<(ProductBase product, int count)> productsInShop;
+        private List<(ProductBase product, int count)> productsInMagazine;
         public Magazine()
         {
-            this.productsInShop = new List<(ProductBase, int)>();
+            this.productsInMagazine = new List<(ProductBase, int)>();
         }
         public void AddProductsToStock(ProductBase product, int count)
         {
             if (count >= 0)
             {
-                this.productsInShop.Add((product, count));
+                this.productsInMagazine.Add((product, count));
             }
             else
             {
@@ -29,21 +29,28 @@ namespace App21
         }
         public void RemoveProductFromStock(ProductBase product, int count)
         {
-            for (var i = 0; i < this.productsInShop.Count; i++)
+            for (var i = 0; i < this.productsInMagazine.Count; i++)
             {
-                if (productsInShop[i].product.Name == product.Name)
+                if (productsInMagazine[i].product.Name == product.Name)
                 {
-                    var x = productsInShop[i];
-                    x.count -= count;
-                    productsInShop[i] = x;
+                    if (productsInMagazine[i].count >= count)
+                    {
+                        var x = productsInMagazine[i];
+                        x.count -= count;
+                        productsInMagazine[i] = x;
+                    }
+                    else
+                    {
+                        throw new Exception($"Insufficient amount of {product.Name} in the warehouse.");
+                    }
                 }
             }
         }
-        public void ShowAcctualStock()
+        public void ShowAcctualStockInMagazine()
         {
-            foreach (var product in this.productsInShop)
+            foreach (var product in this.productsInMagazine)
             {
-                Console.WriteLine($"Name: {product.product.Name} Count: {product.count}");
+                Console.WriteLine($"Product name: {product.product.Name} Count: {product.count}");
             }
         }
     }
