@@ -7,9 +7,9 @@ using System.Linq.Expressions;
 var apple = new Product("Apple", 3.90m);
 var grape = new ProductNearExpiryDate("Grape", 4.50m);
 var tomato = new Product("Tomato", 2.49m);
-
 var magazine = new Magazine();
 var cart = new Cart();
+
 cart.AddProduct += magazine.RemoveProductFromStock;
 
 magazine.AddProductsToStock(apple, 50);
