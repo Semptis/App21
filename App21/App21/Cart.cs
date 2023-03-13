@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace App21
 {
     public class Cart
     {
+        private const string filePath = "history.txt";
         private List<(ProductBase product, int count)> products;
-        public delegate void AddProductDelegate(ProductBase product, int count);
+        public delegate bool AddProductDelegate(ProductBase product, int count);
         public event AddProductDelegate AddProduct;
         public Cart()
         {
@@ -20,10 +22,13 @@ namespace App21
         {
             if (count > 0)
             {
-                products.Add((product, count));
                 if (AddProduct != null)
                 {
-                    AddProduct(product, count);
+                    bool enoughProductsInMagazine = AddProduct(product, count);
+                    if (enoughProductsInMagazine)
+                    {
+                        products.Add((product, count));
+                    }
                 }
             }
             else
@@ -32,13 +37,22 @@ namespace App21
             }
         }
 
-        public float CartSummaryPrice()
+        public decimal FinishTransaction()
         {
-            var sum = 0f;
+            var sum = 0m;
+            var result = "";
             foreach (var item in this.products)
             {
                 sum += item.product.GetPrice() * item.count;
+                result += $" Product: {item.product.Name} Price: {item.product.Price} Count: {item.count} \n";
             }
+
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                result += $" Total: {sum}zł";
+                writer.Write(result);
+            }
+
             return sum;
         }
     }

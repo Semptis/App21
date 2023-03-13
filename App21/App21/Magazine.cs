@@ -27,7 +27,7 @@ namespace App21
                 throw new Exception("The product count is incorrect");
             }
         }
-        public void RemoveProductFromStock(ProductBase product, int count)
+        public bool RemoveProductFromStock(ProductBase product, int count)
         {
             for (var i = 0; i < this.productsInMagazine.Count; i++)
             {
@@ -38,6 +38,7 @@ namespace App21
                         var x = productsInMagazine[i];
                         x.count -= count;
                         productsInMagazine[i] = x;
+                        return true;
                     }
                     else
                     {
@@ -45,13 +46,14 @@ namespace App21
                     }
                 }
             }
+            return false;
         }
         public string ShowAcctualProduktsInMagazine()
         {
             var products = "";
             foreach (var product in this.productsInMagazine)
             {
-                products += $"{product.product.Name} {product.count} ";
+                products += $"{product.product.Name} {product.count} \n ";
             }
             return products;
         }

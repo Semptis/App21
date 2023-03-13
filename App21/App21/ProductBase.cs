@@ -8,15 +8,15 @@ namespace App21
 {
     public abstract class ProductBase: IProduct
     {
-        public ProductBase(string name, float price)
+        public ProductBase(string name, decimal price)
         {
             this.Name= name;
             this.Price= price;
         }
         public string Name { get; private set; }
-        public float Price { get; private set; }
-        public abstract float GetPrice(float weightInGrams);
-        public abstract float GetPrice();
+        public decimal Price { get; private set; }
+        public abstract decimal GetPrice(float weightInGrams);
+        public abstract decimal GetPrice();
 
     }
 }

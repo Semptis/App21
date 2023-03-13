@@ -8,15 +8,15 @@ namespace App21
 {
     public class Product : ProductBase
     {
-        public Product(string name, float price) :
+        public Product(string name, decimal price) :
             base(name, price)
         {
         }
-        public override float GetPrice(float weightInGrams)
+        public override decimal GetPrice(float weightInGrams)
         {
-            return (weightInGrams / 100) * this.Price;
+            return (decimal)(weightInGrams / 100) * this.Price;
         }
-        public override float GetPrice()
+        public override decimal GetPrice()
         {
             return this.Price;
         }

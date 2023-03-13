@@ -8,15 +8,15 @@ namespace App21
 {
     public class ProductNearExpiryDate : ProductBase
     {
-        public ProductNearExpiryDate(string name, float price) :
+        public ProductNearExpiryDate(string name, decimal price) :
             base(name, price)
         {
         }
-        public override float GetPrice(float weightInGrams)
+        public override decimal GetPrice(float weightInGrams)
         {
-            return ((weightInGrams / 100) * this.Price)/2;
+            return ((decimal)(weightInGrams / 100) * this.Price)/2;
         }
-        public override float GetPrice()
+        public override decimal GetPrice()
         {
             return (this.Price)/2;
         }
