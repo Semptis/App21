@@ -5,46 +5,38 @@ namespace App21.Tests
     public class ShopTests
     {
         [Test]
-        public void WhenAddedProductToCart_ShouldCorrectTotal()
+        public void WhenAddedGradeToBookInMemory_ShouldCorrectStatistics()
         {
-            var apple = new Product("Apple", 3.90m);
-            var magazine = new Magazine();
-            var cart = new Cart();
+            
+            var book = new BookInFile("Dziady");
 
-            cart.AddProduct += magazine.RemoveProductFromStock;
-            magazine.AddProductsToStock(apple, 50);
-            cart.AddProductToCart(apple, 5);
+            book.AddGrade(5);
+            book.AddGrade(5.5f);
+            book.AddGrade("7,5");
+            var result = book.GetStatistics();
 
-            Assert.That(cart.FinishTransaction(), Is.EqualTo(19.50));
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(18f, result.Sum);
+            Assert.AreEqual(7.5f, result.Max);
+            Assert.AreEqual(5, result.Min);
+            Assert.AreEqual(6, result.Avg);
         }
         [Test]
-        public void WhenAddedExpireProductToCart_ShouldCorrectTotal()
+        public void WhenAddedGradeToBookInFile_ShouldCorrectStatistics()
         {
-            var apple = new ProductNearExpiryDate("Apple", 3.90m);
-            var magazine = new Magazine();
-            var cart = new Cart();
 
-            cart.AddProduct += magazine.RemoveProductFromStock;
-            magazine.AddProductsToStock(apple, 50);
-            cart.AddProductToCart(apple, 5);
+            var book = new BookInMemory("Dziady");
 
-            Assert.That(cart.FinishTransaction(), Is.EqualTo(9.75));
+            book.AddGrade(5);
+            book.AddGrade(5.5f);
+            book.AddGrade("7,5");
+            var result = book.GetStatistics();
+
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(18f, result.Sum);
+            Assert.AreEqual(7.5f, result.Max);
+            Assert.AreEqual(5, result.Min);
+            Assert.AreEqual(6, result.Avg);
         }
-        [Test]
-        public void WhenAddedMixProductToCart_ShouldCorrectTotal()
-        {
-            var apple = new ProductNearExpiryDate("Apple", 3.90m);
-            var grape = new Product("Grape", 3.80m);
-            var magazine = new Magazine();
-            var cart = new Cart();
-
-            cart.AddProduct += magazine.RemoveProductFromStock;
-            magazine.AddProductsToStock(apple, 50);
-            magazine.AddProductsToStock(grape, 50);
-            cart.AddProductToCart(apple, 5);
-            cart.AddProductToCart(grape, 5);
-
-            Assert.That(cart.FinishTransaction(), Is.EqualTo(28.75));
         }
-    }
-} 
+}

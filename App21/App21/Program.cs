@@ -3,62 +3,59 @@ using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq.Expressions;
 
-
-var apple = new Product("Apple", 3.90m);
-var grape = new ProductNearExpiryDate("Grape", 4.50m);
-var tomato = new Product("Tomato", 2.49m);
-var magazine = new Magazine();
-var cart = new Cart();
-
-cart.AddProduct += magazine.RemoveProductFromStock;
-
-magazine.AddProductsToStock(apple, 50);
-magazine.AddProductsToStock(grape, 50);
-magazine.AddProductsToStock(tomato, 50);
-
 Console.WriteLine("Welcome");
-
-int myInt = 0;
 while (true)
 {
     try
     {
-        var products = magazine.ShowAcctualProduktsInMagazine();
-        Console.WriteLine($"The following products are currently available in the store: \n {products}");
-        Console.WriteLine("Choose what do you want or type 'Exit' to finish transaction: ");
-        var inputProdcut = Console.ReadLine();
-        if (inputProdcut == "Exit" || inputProdcut == "exit")
+        Console.WriteLine("If you want add grade to BookInFile: 1");
+        Console.WriteLine("If you want add grade to BookInMemory: 2");
+        Console.WriteLine("If tou want exit: Exit");
+        var inputOpcion = Console.ReadLine();
+        if (inputOpcion == "Exit" || inputOpcion == "exit")
         {
-            var sum = cart.FinishTransaction();
-            Console.WriteLine($"Total: {sum}");
             break;
         }
-        Console.WriteLine("How many: ");
-        var inputCount = Console.ReadLine();
-        if (int.TryParse(inputCount, out myInt))
+        switch (inputOpcion)
         {
-            switch (inputProdcut)
-            {
-                case "Apple":
-                case "apple":
-                    cart.AddProductToCart(apple, myInt);
+            case "1":
+                {
+                    Console.WriteLine("Please add title: ");
+                    var inputTitle = Console.ReadLine();
+                    var book = new BookInFile(inputTitle);
+                    while (true)
+                    {
+                        Console.WriteLine("Please add grade or X: ");
+                        var inputGrade = Console.ReadLine();
+                        if (inputGrade == "X")
+                        {
+                            break;
+                        }
+                        book.AddGrade(inputGrade);
+                    }
+                    var result = book.GetStatistics();
+                    Console.WriteLine($"Title: {book.Title} Min: {result.Min}, Max: {result.Max}, Avg: {result.Avg}");
                     break;
-                case "Grape":
-                case "grape":
-                    cart.AddProductToCart(grape, myInt);
+                }
+            case "2":
+                {
+                    Console.WriteLine("Please add title: ");
+                    var inputTitle = Console.ReadLine();
+                    var book2 = new BookInMemory(inputTitle);
+                    while (true)
+                    {
+                        Console.WriteLine("Please add grade or X: ");
+                        var inputGrade = Console.ReadLine();
+                        if (inputGrade == "X")
+                        {
+                            break;
+                        }
+                        book2.AddGrade(inputGrade);
+                    }
+                    var result = book2.GetStatistics();
+                    Console.WriteLine($"Title: {book2.Title} Min: {result.Min}, Max: {result.Max}, Avg: {result.Avg}");
                     break;
-                case "Tomato":
-                case "tomato":
-                    cart.AddProductToCart(tomato, myInt);
-                    break;
-                default:
-                    Console.WriteLine("Product inavailable");
-                    break;
-            }
-        }
-        else
-        {
-            Console.WriteLine("Count must be integer");
+                }
         }
     }
     catch (Exception ex)
@@ -66,6 +63,3 @@ while (true)
         Console.WriteLine(ex.Message);
     }
 }
-
-
-
