@@ -1,1 +1,1 @@
-Simple shop app in C#.
+Simple app in C#.
