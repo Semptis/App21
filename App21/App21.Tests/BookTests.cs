@@ -2,7 +2,7 @@ using System.Drawing;
 
 namespace App21.Tests
 {
-    public class ShopTests
+    public class BookTests
     {
         [Test]
         public void WhenAddedGradeToBookInMemory_ShouldCorrectStatistics()
