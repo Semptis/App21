@@ -11,12 +11,12 @@ while (true)
         Console.WriteLine("If you want add grade to BookInFile: 1");
         Console.WriteLine("If you want add grade to BookInMemory: 2");
         Console.WriteLine("If tou want exit: Exit");
-        var inputOpcion = Console.ReadLine();
-        if (inputOpcion == "Exit" || inputOpcion == "exit")
+        var inputOption = Console.ReadLine();
+        if (inputOption == "Exit" || inputOption == "exit")
         {
             break;
         }
-        switch (inputOpcion)
+        switch (inputOption)
         {
             case "1":
                 {
@@ -54,6 +54,11 @@ while (true)
                     }
                     var result = book2.GetStatistics();
                     Console.WriteLine($"Title: {book2.Title} Min: {result.Min}, Max: {result.Max}, Avg: {result.Avg}");
+                    break;
+                }
+            default:
+                {
+                    Console.WriteLine("This option isn't exit");
                     break;
                 }
         }
