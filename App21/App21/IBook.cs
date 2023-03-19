@@ -10,11 +10,10 @@ namespace App21
 {
     public interface IBook
     {
+        event AddGradesDelegate AddGrades;
         string Title { get; }
         void AddGrade(float grade);
         void AddGrade(string grade);
-
-        event AddGradesDelegate AddGrades;
         Statistics GetStatistics();
     }
 }

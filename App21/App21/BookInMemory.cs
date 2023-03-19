@@ -16,6 +16,7 @@ namespace App21
             grades = new List<float>();
             this.AddGrades += Message;
         }
+
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 10)
@@ -31,19 +32,7 @@ namespace App21
                 throw new Exception("Grade must be between 0 - 10");
             }
         }
-        public override void AddGrade(string grade)
-        {
-            float number;
-            bool success = float.TryParse(grade, out number);
-            if (success)
-            {
-                AddGrade(number);
-            }
-            else
-            {
-                throw new Exception($"Attempted conversion of '{grade}' failed.");
-            }
-        }
+
         public override Statistics GetStatistics()
         {
             var result = new Statistics();

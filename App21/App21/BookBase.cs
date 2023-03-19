@@ -13,7 +13,19 @@ namespace App21
         public BookBase(string title) => this.Title = title;
         public string Title { get; private set; }
         public abstract void AddGrade(float grade);
-        public abstract void AddGrade(string grade);
+        public void AddGrade(string grade)
+        {
+            float number;
+            bool success = float.TryParse(grade, out number);
+            if (success)
+            {
+                AddGrade(number);
+            }
+            else
+            {
+                throw new Exception($"Attempted conversion of '{grade}' failed.");
+            }
+        }
         public abstract Statistics GetStatistics();
         public void Message(object sender, EventArgs e)
         {

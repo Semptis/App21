@@ -12,17 +12,15 @@ namespace App21
 {
     public class BookInFile : BookBase
     {
-        private const string fileName = "grade.txt";
         public override event AddGradesDelegate AddGrades;
+        private string fileName;
         public BookInFile(string title) :
             base(title)
         {
-            if (File.Exists($"{fileName}"))
-            {
-                File.Delete($"{fileName}");
-            }
+            fileName = $"grades{title}";
             this.AddGrades += Message;
         }
+
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 10)
@@ -41,19 +39,7 @@ namespace App21
                 throw new Exception("Grade must be between 0 - 10");
             }
         }
-        public override void AddGrade(string grade)
-        {
-            float number;
-            bool success = float.TryParse(grade, out number);
-            if (success)
-            {
-                AddGrade(number);
-            }
-            else
-            {
-                throw new Exception($"Attempted conversion of '{grade}' failed.");
-            }
-        }
+
         public override Statistics GetStatistics()
         {
             var result = new Statistics();
